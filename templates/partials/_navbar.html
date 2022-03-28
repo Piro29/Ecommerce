@@ -1,0 +1,86 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg sticky-top border-bottom border-secondary" style="background:rgb(128,128,128);">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'index' %}">
+            E-Co
+        </a>
+
+        <div class=" navbar-collapse ">
+            <ul class="navbar-nav s-text40">
+                <li class="nav-link">
+                    <a href="{% url 'index' %}"
+                       {% if '/' == request.path %}
+                    class="nav-link font-weight-bold bg-dark text-light btn"
+                    {% else %}
+                    class="nav-link text-light"
+                    {% endif %} >Home</a>
+                </li>
+                <li class="nav-link">
+                    <a href="{% url 'products' %}"
+                       {% if '/products/' == request.path %}
+                    class="nav-link font-weight-bold bg-dark text-light btn"
+                    {% else %}
+                    class="nav-link text-light"
+                    {% endif %}
+                    >Products</a>
+                </li>
+
+                <li class="nav-link">
+                    <a href="{% url 'about' %}"
+                       {% if '/about' == request.path %}
+                    class="nav-link font-weight-bold bg-dark text-light btn"
+                    {% else %}
+                    class="nav-link text-light"
+                    {% endif %} >About</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                <li class="nav-link mt-1 "></li>
+                        <li
+                        {% if 'cart' in request.path %}
+                          class="nav-link font-weight-bold mr-3"
+                        {% else %}
+                          class="nav-link mr-3 text-light"
+                        {% endif %}
+                        >
+
+                          <a class="nav-link text-light" href="{% url 'cartpage' %}">
+                           <span class="fa fa-shopping-bag"></span> {{ count }}</a>
+                        </li>
+                        <li class="nav-link mr-3 ">
+                          <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link text-light">
+                            Logout
+                          </a>
+                          <form action="{% url 'logout' %}" method="POST" id="logout">
+                            {% csrf_token %}
+                            <input type="hidden">
+                          </form>
+                        </li>
+                {% else %}
+                    <li class="nav-link mr-3">
+                      <a href="{% url 'register' %}"
+                      {% if '/accounts/register' in request.path %}
+                      class="nav-link font-weight-bold bg-dark text-light btn"
+                    {% else %}
+                      class="nav-link text-light"
+                    {% endif %}
+                      >
+                        Register</a>
+                    </li>
+                    <li class="nav-link mr-3">
+                      <a href="{% url 'login' %}"
+                      {% if '/accounts/login' in request.path %}
+                      class="nav-link font-weight-bold bg-dark text-light btn"
+                    {% else %}
+                      class="nav-link text-light"
+                    {% endif %}>
+                        Login</a>
+                    </li>
+          {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>

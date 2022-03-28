@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+<div class="body-a">
+    <div class="pimg1">
+        <div class="ptext">
+      <span class="border">
+        About us
+      </span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row mb-5 pt-5">
+            <div class="col-lg-5 col-md-5 col-12 img-thumbnail">
+                <img src="{% static 'img/mane.jpg' %}" style="width:470px;height:540px;">
+            </div>
+            <div class="col-lg-7 col-md-7 col-12">
+                <section class="section section-light">
+                    <h2>Section One</h2>
+                    <br>
+                    <p>
+                      This is our prototype Ecommerce website.This was made for an educational purpose.
+                    </p>
+                </section>
+            </div>
+        </div>
+
+        <div class="pimg2">
+            <div class="ptext">
+      <span class="border trans">
+        Contact
+      </span>
+            </div>
+        </div>
+
+        <section class="section section-dark">
+
+            <section class="p-3">
+                <div class="container">
+
+                    <form style="padding: 1rem; border: 5px solid white; margin:1px;">
+                        <h1>Get In Touch</h1>
+                        <div>
+                            <label for="name" style="display: block;">Name:</label>
+                            <input type="text" id="name" style="width: 50%; padding: 8px; margin-bottom: 10px; border-radius: 5px;border: 1px solid #ccc;">
+                        </div>
+                        <div>
+                            <label for="email" style="display: block;">Email:</label>
+                            <input type="text" id="email" style="width: 50%;padding: 8px; margin-bottom: 10px; border-radius: 5px;border: 1px solid #ccc;">
+                        </div>
+                        <div>
+                            <label for="name" style="display: block;">Subject:</label>
+                            <input type="text" id="subject" style="width: 50%; padding: 8px; margin-bottom: 10px; border-radius: 5px;border: 1px solid #ccc;">
+                        </div>
+                        <div>
+                            <label for="name" style="display: block;">Message:</label>
+                            <input type="text" id="message" style="width: 50%;height : 100px; padding: 8px; margin-bottom: 10px; border-radius: 5px;border: 1px solid #ccc;">
+                        </div>
+                        <input class="btun" type="submit" value="Submit" >
+                    </form>
+
+                </div>
+            </section>
+        </section>
+    </div>
+    {% endblock %}

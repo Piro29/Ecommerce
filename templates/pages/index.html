@@ -1,0 +1,333 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+<style>
+	/*[ Block2 ]
+///////////////////////////////////////////////////////////
+*/
+.block2-labelpromotion::before,
+.block2-labelsale::before,
+.block2-labelnew::before
+{
+  z-index: 100;
+  font-family: Montserrat-Regular;
+  font-size: 12px;
+  color: white;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 22px;
+  border-radius: 11px;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+.block2-labelsale::before {
+  background-color: #e65540;
+  content: 'Sale';
+}
+
+.block2-labelnew::before {
+  background-color: #66a8a6;
+  content: 'New';
+}
+
+.block2-labelpromotion::before{
+	background-color: #000;
+	content: 'Promotion';
+	width: 70px;
+  }
+
+  .btn-dark {
+    color: #fff;
+    background-color: #000;
+    border-color: #000;
+}
+
+.btn-outline-dark {
+    color: #000;
+    border-color: #000;
+}
+
+</style>
+
+<!-- Slide1 -->
+<section class="slide1">
+		<div class="wrap-slick1">
+			<div class="slick1">
+				<div class="item-slick1 item1-slick1">
+<!--					<img src="{% static 'img/master3.png' %}" style="width:100%; height:100%;object-fit:cover">-->
+					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170" style="background-image: url({% static 'img/master-slide-02.webp' %});">
+
+							<div class="container">
+									<div class="carousel-caption text-left">
+									  <h1 style="color: #000; font-weight: 600;">POWERED BY THE PAST</h1>
+									  <p><a class="btn btn-lg btn-dark" href="{% url 'products' %}search?keywords=&gender=men" role="button" style="margin-bottom: 10px; margin-top:5px;">SHOP MEN <i class="fa fa-arrow-right"></i></a></p>
+
+									  <p><a class="btn btn-lg btn-dark" href="{% url 'products' %}search?keywords=&gender=women" role="button" style="margin-bottom: 160px;">SHOP WOMEN <i class="fa fa-arrow-right"></i></a></p>
+									</div>
+								  </div>
+
+					</div>
+				</div>
+
+				<div class="item-slick1 item2-slick1" style="background-image: url({% static 'img/master3.png' %});">
+					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
+						<span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15" data-appear="rollIn">
+							Men Collection 2018
+						</span>
+
+						<h2 class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37" data-appear="lightSpeedIn">
+							New arrivals
+						</h2>
+
+						<div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="slideInUp">
+							<!-- Button -->
+							<a href="{% url 'products' %}" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+								Shop Now
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="item-slick1 item3-slick1" style="background-image: url({% static 'img/master-slide-03.webp' %});">
+					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
+						<span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15" data-appear="rotateInDownLeft">
+							Women Collection 2018
+						</span>
+
+						<h2 class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37" data-appear="rotateInUpRight">
+							New arrivals
+						</h2>
+
+						<div class="wrap-btn-slide1 w-size1 animated visible-false" data-appear="rotateIn">
+							<!-- Button -->
+							<a href="{% url 'products' %}" class="flex-c-m size2 bo-rad-23 s-text2 bgwhite hov1 trans-0-4">
+								Shop Now
+							</a>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+ {% include 'partials/_alerts.html' %}
+
+
+<!-- Banner -->
+<section class="banner bgwhite p-t-40 p-b-40">
+    <div class="container">
+        {% if user.is_authenticated %}
+        {% if recommend %}
+        <div class="sec-title p-b-60">
+            <h3 class="m-text5 t-center">
+                Recommended Products
+            </h3>
+        </div>
+
+    <div class="wrap-slick2" style="height:30em">
+            <div class="slick2">
+
+                {% for product in recommend %}
+                    <div class="item-slick2 col-sm-12 col-md-6 col-lg-3 p-b-50 ">
+                        <!-- Block2 -->
+                        <div class="block2">
+                            <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+                                <img src="{{ product.photo_main.url }}" alt="IMG-PRODUCT"
+                                     style="height: 360px;">
+                                <div class="block2-overlay trans-0-4">
+
+                                    <div class="block2-btn-addcart w-size1 trans-0-4">
+                                        <a class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" href="{% url 'product' product.id %}">
+                                            Detail
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="block2-txt p-t-20">
+                                <a href="{% url 'product' product.id %}" class="block2-name dis-block s-text3 p-b-5">
+                                    {{product.title}}
+                                </a>
+
+                                <span class="block2-price m-text6 p-r-5">
+										Rs.{{product.price | intcomma}}
+									</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+            </div>
+        </div>
+{% endif %}
+{% endif %}
+        <div class="row p-t-80">
+            <div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
+                <!-- block1 -->
+                <div class="block1 hov-img-zoom pos-relative m-b-30">
+                    <img src="{% static 'img/banner-02.webp' %}" alt="IMG-BENNER">
+
+                    <div class="block1-wrapbtn w-size2">
+                        <!-- Button -->
+                        <a href="#" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+                            Dresses
+                        </a>
+                    </div>
+                </div>
+
+                <!-- block1 -->
+                <div class="block1 hov-img-zoom pos-relative m-b-30">
+                    <img src="{% static 'img/item-03.webp' %}" alt="IMG-BENNER" style="height:350px;object-fit:fill">
+
+                    <div class="block1-wrapbtn w-size2">
+                        <!-- Button -->
+                        <a href="{% url 'products' %}search?keywords=&category=Jackets+Coats" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+                            Jackets Coats
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
+                <!-- block1 -->
+                <div class="block1 hov-img-zoom pos-relative m-b-30">
+                    <img src="{% static 'img/men.jpg' %}" alt="IMG-BENNER">
+
+                    <div class="block1-wrapbtn w-size2">
+                        <!-- Button -->
+                        <a href="{% url 'products' %}search?keywords=&category=Jackets+Vest" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+                            Suiting
+                        </a>
+                    </div>
+                </div>
+
+                <!-- block1 -->
+                <div class="block1 hov-img-zoom pos-relative m-b-30">
+                    <img src="{% static 'img/item-11.webp' %}" alt="IMG-BENNER">
+
+                    <div class="block1-wrapbtn w-size2">
+                        <!-- Button -->
+                        <a href="{% url 'products' %}search?keywords=&category=Pants" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+                            Pants
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-10 col-md-8 col-lg-4 m-l-r-auto">
+                <!-- block1 -->
+                <div class="block1 hov-img-zoom pos-relative m-b-30">
+                    <img src="{% static 'img/item-07.webp' %}" alt="IMG-BENNER">
+
+                    <div class="block1-wrapbtn w-size2">
+                        <!-- Button -->
+                        <a href="{% url 'products' %}search?keywords=&category=Shorts" class="flex-c-m size2 m-text2 bg3 hov1 trans-0-4">
+                            Shorts
+                        </a>
+                    </div>
+                </div>
+
+                <!-- block2 -->
+                <div class="block2 wrap-pic-w pos-relative m-b-30">
+                    <img src="{% static 'img/icons/bg-01.jpg' %}" alt="IMG">
+
+                    <div class="block2-content sizefull ab-t-l flex-col-c-m">
+                        <h4 class="m-text4 t-center w-size3 p-b-8">
+                            Sign up & get 20% off
+                        </h4>
+
+                        <p class="t-center w-size4">
+                            Be the frist to know about the latest fashion news and get exclusive offers
+                        </p>
+
+                        <div class="w-size2 p-t-25">
+                            <!-- Button -->
+                            <a href="{% url 'register' %}" class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
+                                Register
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- New Product -->
+<section class="newproduct bgwhite p-t-45 p-b-105">
+    <div class="container" style="height:29em">
+        <div class="sec-title p-b-60">
+            <h3 class="m-text5 t-center">
+                Latest Products
+            </h3>
+        </div>
+
+        <!-- Slide2 -->
+        <div class="wrap-slick2">
+            <div class="slick2">
+
+                {% for product in products %}
+                    <div class="item-slick2 col-sm-12 col-md-6 col-lg-3 p-b-50 ">
+                        <!-- Block2 -->
+                        <div class="block2">
+                            <div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
+                                <img src="{{ product.photo_main.url }}" alt="IMG-PRODUCT"
+                                     style="height: 360px;">
+                                <div class="block2-overlay trans-0-4">
+
+                                    <div class="block2-btn-addcart w-size1 trans-0-4">
+                                        <a class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4" href="{% url 'product' product.id %}">
+                                            Detail
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="block2-txt p-t-20">
+                                <a href="{% url 'product' product.id %}" class="block2-name dis-block s-text3 p-b-5">
+                                    {{product.title}}
+                                </a>
+
+                                <span class="block2-price m-text6 p-r-5">
+										Rs.{{product.price | intcomma}}
+									</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+
+<!-- Back to top -->
+<div class="btn-back-to-top bg0-hov" id="myBtn">
+  <span class="symbol-btn-back-to-top">
+    <i class="fa fa-angle-double-up" aria-hidden="true"></i>
+  </span>
+</div>
+
+<!-- Container Selection1 -->
+<div id="dropDownSelect1"></div>
+
+
+{% endblock content %}
+
+
